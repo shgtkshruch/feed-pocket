@@ -8,6 +8,9 @@ autoprefixer = require 'autoprefixer'
 propsort = require 'css-property-sorter'
 mqpacker = require 'css-mqpacker'
 fmt = require 'cssfmt'
+browserify = require 'browserify'
+source = require 'vinyl-source-stream'
+coffeeify = require 'coffeeify'
 del = require 'del'
 ghpages = require 'gh-pages'
 path = require 'path'
@@ -77,11 +80,13 @@ gulp.task 'sass', ->
       stream: true
 
 gulp.task 'coffee', ->
-  gulp.src config.src + '/scripts/*.coffee'
-    .pipe $.plumber()
-    .pipe $.changed config.dest,
-      extension: '.js'
-    .pipe $.coffee()
+  browserify config.src + '/scripts/app.coffee'
+    .transform coffeeify
+    .bundle()
+    .on 'error', (err) ->
+      console.log 'Error: ' + err.message
+      @.emit 'end'
+    .pipe source 'app.js'
     .pipe gulp.dest config.dest + '/scripts'
     .pipe browserSync.reload
       stream: true
