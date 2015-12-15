@@ -29,13 +29,13 @@ gulp.task 'browser-sync', ->
     browser: 'Google Chrome Canary'
 
 gulp.task 'wiredep', ->
-  gulp.src config.src + '/index.jade'
+  gulp.src config.src + '/layout.jade'
     .pipe wiredep()
     .pipe gulp.dest config.src
 
 gulp.task 'html', ['jade'], ->
   assets = $.useref.assets()
-  gulp.src config.dest + '/index.html'
+  gulp.src config.dest + '/*.html'
     .pipe assets
     .pipe assets.restore()
     .pipe $.useref()
