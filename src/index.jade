@@ -4,16 +4,24 @@ block title
   title Feed Pocket
 
 block body
-  - sites = {}
-  - sites[1] = {title: 'dezeen'}
-  - sites[2] = {title: 'designboom'}
-  - sites[3] = {title: 'yatzer'}
-  - sites[4] = {title: 'archdaily'}
-  - sites[5] = {title: 'awwwards'}
-  nav.gnav
-    ul
-      each site, i in sites
-        li.gnav__item
-          a.gnav__link(href="#{site.title}.html")
-            span.gnav__title= site.title
-
+  body.home
+    - sites = {}
+    - sites[1] = {title: 'about', desc: 'FEED POCKET is a site that summarizes the RSS feed of design and architecture and Web design.'}
+    - sites[2] = {title: 'dezeen', link: 'dezeen.html', desc: "The world's most influential architecture, interiors and design magazine"}
+    - sites[3] = {title: 'designboom', link: 'designboom.html', desc: 'est. 1999 designboom is the first and most popular digital magazine for architecture & design culture. daily news for a professional and creative audience.'}
+    - sites[4] = {title: 'yatzer', link: 'yatzer.html', desc: 'Yatzer is a global online destination that allows readers to both discover and follow the most engaging creative projects and people in art, fashion, design, architecture and hospitality from around the world.'}
+    - sites[5] = {title: 'archdaily', link: 'archdaily.html', desc: 'ArchDaily, Broadcasting Architecture Worldwide: Architecture news, competitions and projects updated every hour for the architecture professional'}
+    - sites[6] = {title: 'awwwards', link: 'awwwards.html', desc: 'Awwwards are the Website Awards that recognize and promote the talent and effort of the best developers, designers and web agencies in the world.'}
+    nav.gnav
+      ul.clearfix
+        each site, i in sites
+          li.gnav__item
+            if site.link
+              a.gnav__link(href="#{site.title}.html")
+                span.gnav__title= site.title
+                .gnav__fadeIn
+                  span.gnav__desc= site.desc
+            else
+              span.gnav__title= site.title
+              .gnav__fadeIn
+                span.gnav__desc= site.desc

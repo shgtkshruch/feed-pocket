@@ -1,0 +1,51 @@
+.gnav {
+  $width-hover: 25vw;
+  $duration: .7s;
+  &:hover .gnav__item:not(:hover) {
+    width: ((100vw - $width-hover) / 5);
+  }
+  &__item {
+    box-sizing: border-box;
+    float: left;
+    width: calc(100vw / 6);
+    height: 100vh;
+    padding: 30px 20px;
+    transition: width $duration;
+    &:hover {
+      width: $width-hover;
+      background-image: linear-gradient(#FF7F68, #EFD87C);
+      .gnav__title {
+        font-size: 20px;
+        color: #fff;
+      }
+      .gnav__fadeIn {
+        opacity: 1;
+        padding-left: 0;
+      }
+    }
+  }
+  &__link {
+    display: block;
+    height: 100vh;
+  }
+  &__title {
+    display: block;
+    margin-bottom: 40px;
+    color: #888;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    transition: all $duration;
+  }
+  &__fadeIn {
+    opacity: 0;
+    transition: all $duration;
+    width: calc(#{$width-hover} - 60px);
+    padding-left: 50px;
+  }
+  &__desc {
+    color: #fff;
+    line-height: 1.4;
+  }
+}

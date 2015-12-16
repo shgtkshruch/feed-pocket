@@ -10,6 +10,7 @@ html(lang="ja")
     meta(content='keywords', name='keywords')
     meta(content='width=device-width, initial-scale=1' name='viewport')
     meta(content='telephone=no', name='format-detection')
+    link(href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css')
     // build:css styles/vendor.css
     // bower:css
     link(rel='stylesheet', href='../bower_components/normalize-css/normalize.css')
@@ -17,17 +18,16 @@ html(lang="ja")
     // endbuild
     link(rel='stylesheet', href='styles/style.css', media='all')
 
-  body
-    block body
+  block body
 
-    script(type="text/template" id="article-template")
-      article.article
-        h2.article__title
-          a(href!="<%= link %>") <%= title %>
-        p.artice__date <%= date %>
-        img.article__img(src!="<%= src %>" alt="")
-        p.article__text <%= text %>
+  script(type="text/template" id="article-template")
+    article.article
+      h2.article__title
+        a(href!="<%= link %>") <%= title %>
+      p.artice__date <%= date %>
+      img.article__img(src!="<%= src %>" alt="")
+      p.article__text <%= text %>
 
-    script(src='https://www.google.com/jsapi')
+  script(src='https://www.google.com/jsapi')
 
-    script(src='scripts/app.js')
+  script(src='scripts/app.js')

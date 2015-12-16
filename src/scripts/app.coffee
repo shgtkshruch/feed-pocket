@@ -44,7 +44,6 @@ initialize = ->
       $fragment = $ document.createDocumentFragment()
       i = 0
       while i < entries.length
-        console.log entries[i]
         article = {}
         $$ = cheerio.load entries[i].content,
           normalizeWhitespace: true
