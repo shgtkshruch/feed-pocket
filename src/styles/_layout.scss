@@ -1,0 +1,20 @@
+.l {
+  &-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $width-unit;
+    height: 100vh;
+  }
+  &-fullpage {
+    width: $width-unit * 3;
+    margin-left: $width-unit * 2;
+  }
+  &-fullpageMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: $width-unit;
+    height: 100vh;
+  }
+}

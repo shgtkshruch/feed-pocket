@@ -2,9 +2,17 @@ extends layout
 
 block body
   body
+    header.header.l-header
+    main
+      #fullpage.l-fullpage
+      ul#fullpageMenu.l-fullpageMenu.fullpageMenu
+        .fullpageMenu__inner
+          - for (var i = 1; i < 11; i++)
+            li.fullpageMenu__item(data-menuanchor="#{i}")
+              a.fullpageMenu__link(href="##{i}")
 
     script(type="text/template" id="article-template")
-      article.article
+      article.article.section(data-anchor!="<%= anchor %>")
         h2.article__title
           a(href!="<%= link %>") <%= title %>
         p.artice__date <%= date %>

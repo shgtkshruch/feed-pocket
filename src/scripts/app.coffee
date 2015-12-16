@@ -2,6 +2,7 @@ $ = require 'jquery'
 _ = require 'underscore'
 cheerio = require 'cheerio'
 moment = require 'moment'
+fullpage = require 'fullpage.js'
 
 articleTemplate = _.template $('#article-template').text()
 
@@ -51,12 +52,12 @@ initialize = ->
         article.title = entries[i].title
         article.link = entries[i].link
         article.date = moment(new Date(entries[i].publishedDate)).format('D MMMM YYYY, HH:hh')
-        $ '<article></article>'
-          .append articleTemplate article
-          .appendTo $fragment
+        article.anchor = i + 1
+        $fragment.append articleTemplate article
         i++
-      $ 'body'
+      $ '#fullpage'
         .append $fragment
+        .fullpage
+          menu: '#fullpageMenu'
 
 google.setOnLoadCallback initialize
-

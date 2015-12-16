@@ -27,6 +27,7 @@ gulp.task 'browser-sync', ->
       baseDir: config.dest
       routes:
         '/bower_components': 'bower_components'
+        '/node_modules': 'node_modules'
     notify: false
     reloadDelay: 0
     browser: 'Google Chrome Canary'

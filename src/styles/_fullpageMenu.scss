@@ -1,0 +1,28 @@
+.fullpageMenu {
+  $size: 10px;
+  &__inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    &.active .fullpageMenu__link {
+      width: $size * 2;
+      height: $size * 2;
+      background-color: #FF7F68;
+    }
+  }
+  &__link {
+    display: block;
+    width: $size;
+    height: $size;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50%;
+    background-color: #FFDB68;
+  }
+}
