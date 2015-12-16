@@ -14,10 +14,10 @@
     color: #FF7F68;
   }
   &__date {
+    box-sizing: border-box;
     display: table-cell;
     width: $width-unit;
     padding: 15px;
-    background-image: linear-gradient(to top left, #FF7F68, #EFD87C);
     color: #fff;
     vertical-align: middle;
   }

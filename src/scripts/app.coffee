@@ -59,5 +59,21 @@ initialize = ->
         .append $fragment
         .fullpage
           menu: '#fullpageMenu'
+          afterRender: ->
+            $article = $('.article').eq(0)
+            $article.find('img').load ->
+              $ '#cover'
+                .css
+                  top: $article.find('.article__header').offset().top
+                  height: $article.find('.article__header').height()
+              .fadeIn()
+          onLeave: (index, nextIndex, direction) ->
+            if Math.abs(index - nextIndex) > 1 or direction is 'up'
+              index = nextIndex - 1
+            $articleHeader = $('.article').eq(index).find('.article__header')
+            $ '#cover'
+              .css
+                top: $articleHeader.position().top
+                height: $articleHeader.height()
 
 google.setOnLoadCallback initialize
