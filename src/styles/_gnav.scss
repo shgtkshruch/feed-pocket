@@ -27,6 +27,9 @@
   &__link {
     display: block;
     height: 100vh;
+    &:hover {
+      text-decoration: none;
+    }
   }
   &__title {
     display: block;
