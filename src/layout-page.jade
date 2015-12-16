@@ -18,6 +18,8 @@ block body
               a.nav__link(href="#{nav.link}")= nav.text
     main
       #fullpage.l-fullpage
+      h2.l-pageTitle.pageTitle
+        block pageTitle
       ul#fullpageMenu.l-fullpageMenu.fullpageMenu
         .fullpageMenu__inner
           - for (var i = 1; i < 11; i++)
@@ -26,11 +28,13 @@ block body
 
     script(type="text/template" id="article-template")
       article.article.section(data-anchor!="<%= anchor %>")
-        h2.article__title
-          a(href!="<%= link %>") <%= title %>
-        p.artice__date <%= date %>
-        img.article__img(src!="<%= src %>" alt="")
-        p.article__text <%= text %>
+        header.article__header.clearfix
+          h2.article__title
+            a.article__link(href!="<%= link %>") <%= title %>
+          span.article__date <%= date %>
+        .article__body.clearfix
+          img.article__img(src!="<%= src %>" alt="")
+          p.article__text <%= text %>
 
     script(src='https://www.google.com/jsapi')
 

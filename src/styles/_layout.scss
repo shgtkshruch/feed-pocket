@@ -6,6 +6,12 @@
     width: $width-unit;
     height: 100vh;
   }
+  &-pageTitle {
+    position: fixed;
+    top: 50%;
+    left: $width-unit * 1.5;
+    transform: translateY(-50%);
+  }
   &-fullpage {
     width: $width-unit * 3;
     margin-left: $width-unit * 2;

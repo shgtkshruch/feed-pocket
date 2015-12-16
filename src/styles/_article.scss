@@ -1,0 +1,45 @@
+.article {
+  &__header {
+    display: table-row;
+    width: $width-unit * 3;
+  }
+  &__title {
+    box-sizing: border-box;
+    display: table-cell;
+    width: $width-unit * 2;
+    padding-right: 10px;
+    font-size: 30px;
+  }
+  &__link {
+    color: #FF7F68;
+  }
+  &__date {
+    display: table-cell;
+    width: $width-unit;
+    padding: 15px;
+    background-image: linear-gradient(to top left, #FF7F68, #EFD87C);
+    color: #fff;
+    vertical-align: middle;
+  }
+  &__body {
+    position: relative;
+    margin-top: 20px;
+  }
+  &__img {
+    box-sizing: border-box;
+    width: $width-unit * 2;
+    float: right;
+    padding-left: 1em;
+  }
+  &__text {
+    position: absolute;
+    bottom: 0;
+    width: $width-unit;
+    max-height: calc(6em * 1.4);
+    line-height: 1.4;
+    overflow: hidden;
+    a {
+      color: #FF7F68;
+    }
+  }
+}
