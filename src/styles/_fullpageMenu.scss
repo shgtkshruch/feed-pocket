@@ -25,5 +25,10 @@
     border-radius: 50%;
     background-color: #FFDB68;
     transition: all $scroll-speed;
+    &:hover {
+      width: $size * 2;
+      height: $size * 2;
+      background-color: #FF7F68;
+    }
   }
 }
