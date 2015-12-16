@@ -1,0 +1,24 @@
+.nav {
+  &__link {
+    position: relative;
+    display: inline-block;
+    padding: 15px 0 5px;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      background-color: #fff;
+      transition: width .3s;
+    }
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
