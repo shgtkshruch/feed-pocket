@@ -20,14 +20,3 @@ html(lang="ja")
 
   block body
 
-  script(type="text/template" id="article-template")
-    article.article
-      h2.article__title
-        a(href!="<%= link %>") <%= title %>
-      p.artice__date <%= date %>
-      img.article__img(src!="<%= src %>" alt="")
-      p.article__text <%= text %>
-
-  script(src='https://www.google.com/jsapi')
-
-  script(src='scripts/app.js')
