@@ -25,7 +25,10 @@
     }
   }
   &__link {
+    box-sizing: border-box;
     display: block;
+    padding: 30px 20px;
+    margin: -30px -20px;
     height: 100vh;
     &:hover {
       text-decoration: none;
