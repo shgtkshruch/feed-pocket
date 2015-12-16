@@ -27,6 +27,8 @@ block body
             li.fullpageMenu__item(data-menuanchor="#{i}")
               a.fullpageMenu__link(href="##{i}")
 
+    include partials/githubCorner
+
     script(type="text/template" id="article-template")
       article.article.section(data-anchor!="<%= anchor %>")
         header.article__header.clearfix
