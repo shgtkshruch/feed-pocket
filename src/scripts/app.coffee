@@ -68,24 +68,28 @@ initialize = ->
             i++
             cb()
       ), (err) ->
+        $cover = $ '#cover'
+        $scroll = $ '#scroll'
         $ '#fullpage'
           .append $fragment
           .fullpage
             menu: '#fullpageMenu'
             afterRender: ->
               $article = $('.article').eq(0)
-              $ '#cover'
+              $cover
                 .css
                   top: $article.find('.article__header').offset().top
                   height: $article.find('.article__header').height()
-              .fadeIn()
+                .fadeIn()
+              $scroll.fadeIn()
             onLeave: (index, nextIndex, direction) ->
+              if direction is 'down'
+                $scroll.fadeOut()
               if Math.abs(index - nextIndex) > 1 or direction is 'up'
                 index = nextIndex - 1
               $articleHeader = $('.article').eq(index).find('.article__header')
-              $ '#cover'
-                .css
-                  top: $articleHeader.position().top
-                  height: $articleHeader.height()
+              $cover.css
+                top: $articleHeader.position().top
+                height: $articleHeader.height()
 
 google.setOnLoadCallback initialize
