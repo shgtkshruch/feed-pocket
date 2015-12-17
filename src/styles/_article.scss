@@ -28,8 +28,9 @@
   }
   &__img {
     box-sizing: border-box;
-    width: $width-unit * 2;
     float: right;
+    width: $width-unit * 2;
+    max-height: 70vh;
     padding-left: 1em;
   }
   &__text {
