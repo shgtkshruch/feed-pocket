@@ -56,17 +56,9 @@ initialize = ->
         article.link = entries[i].link
         article.date = moment(new Date(entries[i].publishedDate)).format('D MMMM YYYY, HH:hh')
         article.anchor = i + 1
-        $ '<img/>'
-          .attr 'src', article.src
-          .on 'load', ->
-            $fragment.append articleTemplate article
-            i++
-            cb()
-          .on 'error', ->
-            article.src = 'http://placehold.it/350x350?text=+'
-            $fragment.append articleTemplate article
-            i++
-            cb()
+        $fragment.append articleTemplate article
+        i++
+        cb()
       ), (err) ->
         $cover = $ '#cover'
         $scroll = $ '#scroll'
@@ -76,12 +68,13 @@ initialize = ->
             menu: '#fullpageMenu'
             afterRender: ->
               $article = $('.article').eq(0)
-              $cover
-                .css
-                  top: $article.find('.article__header').offset().top
-                  height: $article.find('.article__header').height()
-                .fadeIn()
-              $scroll.fadeIn()
+              $article.find('img').on 'load', ->
+                $cover
+                  .css
+                    top: $article.find('.article__header').offset().top
+                    height: $article.find('.article__header').height()
+                  .fadeIn()
+                $scroll.fadeIn()
             onLeave: (index, nextIndex, direction) ->
               if direction is 'down'
                 $scroll.fadeOut()

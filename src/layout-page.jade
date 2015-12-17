@@ -37,7 +37,7 @@ block body
             a.article__link(href!="<%= link %>" target="_blank") <%= title %>
           span.article__date <%= date %>
         .article__body.clearfix
-          img.article__img(src!="<%= src %>" alt="")
+          img.article__img(src!="<%= src %>" alt="" onerror="this.src='http://placehold.it/300x300?text=+'")
           p.article__text <%= text %>
 
     script(src='https://www.google.com/jsapi')
