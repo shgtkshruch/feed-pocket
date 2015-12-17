@@ -6,5 +6,5 @@
   width: $width-unit;
   background-image: linear-gradient(to top left, #FF7F68, #EFD87C);
   height: 150px;
-  transition: height $scroll-speed;
+  transition: all $scroll-speed;
 }
