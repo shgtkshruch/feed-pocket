@@ -1,5 +1,6 @@
 $ = require 'jquery'
 _ = require 'underscore'
+async = require 'async'
 cheerio = require 'cheerio'
 moment = require 'moment'
 fullpage = require 'fullpage.js'
@@ -44,7 +45,9 @@ initialize = ->
       entries = result.feed.entries
       $fragment = $ document.createDocumentFragment()
       i = 0
-      while i < entries.length
+      async.whilst (->
+        i < entries.length
+      ), ((cb) ->
         article = {}
         $$ = cheerio.load entries[i].content,
           normalizeWhitespace: true
@@ -53,29 +56,36 @@ initialize = ->
         article.link = entries[i].link
         article.date = moment(new Date(entries[i].publishedDate)).format('D MMMM YYYY, HH:hh')
         article.anchor = i + 1
-        $fragment.append articleTemplate article
-        i++
-      $ '#fullpage'
-        .append $fragment
-        .fullpage
-          menu: '#fullpageMenu'
-          afterRender: ->
-            $article = $('.article').eq(0)
-            $article
-              .find('img')
-              .on 'load', ->
-                $ '#cover'
-                  .css
-                    top: $article.find('.article__header').offset().top
-                    height: $article.find('.article__header').height()
-                .fadeIn()
-          onLeave: (index, nextIndex, direction) ->
-            if Math.abs(index - nextIndex) > 1 or direction is 'up'
-              index = nextIndex - 1
-            $articleHeader = $('.article').eq(index).find('.article__header')
-            $ '#cover'
-              .css
-                top: $articleHeader.position().top
-                height: $articleHeader.height()
+        $ '<img/>'
+          .attr 'src', article.src
+          .on 'load', ->
+            $fragment.append articleTemplate article
+            i++
+            cb()
+          .on 'error', ->
+            article.src = 'http://placehold.it/350x350?text=+'
+            $fragment.append articleTemplate article
+            i++
+            cb()
+      ), (err) ->
+        $ '#fullpage'
+          .append $fragment
+          .fullpage
+            menu: '#fullpageMenu'
+            afterRender: ->
+              $article = $('.article').eq(0)
+              $ '#cover'
+                .css
+                  top: $article.find('.article__header').offset().top
+                  height: $article.find('.article__header').height()
+              .fadeIn()
+            onLeave: (index, nextIndex, direction) ->
+              if Math.abs(index - nextIndex) > 1 or direction is 'up'
+                index = nextIndex - 1
+              $articleHeader = $('.article').eq(index).find('.article__header')
+              $ '#cover'
+                .css
+                  top: $articleHeader.position().top
+                  height: $articleHeader.height()
 
 google.setOnLoadCallback initialize
