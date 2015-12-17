@@ -1,13 +1,13 @@
 .gnav {
-  $width-hover: 25vw;
+  $width-hover: 25%;
   $duration: .7s;
   &:hover .gnav__item:not(:hover) {
-    width: ((100vw - $width-hover) / 5);
+    width: ((100% - $width-hover) / 5);
   }
   &__item {
     box-sizing: border-box;
     float: left;
-    width: calc(100vw / 6);
+    width: $width-unit;
     height: 100vh;
     padding: 30px 20px;
     transition: width $duration;
@@ -47,7 +47,7 @@
   &__fadeIn {
     opacity: 0;
     transition: all $duration;
-    width: calc(#{$width-hover} - 60px);
+    width: calc(100% - 60px);
     padding-left: 50px;
   }
   &__desc {
