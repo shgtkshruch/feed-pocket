@@ -1,6 +1,5 @@
 $ = require 'jquery'
 _ = require 'underscore'
-async = require 'async'
 cheerio = require 'cheerio'
 moment = require 'moment'
 fullpage = require 'fullpage.js'
@@ -44,10 +43,10 @@ initialize = ->
     if !result.error
       entries = result.feed.entries
       $fragment = $ document.createDocumentFragment()
+      $cover = $ '#cover'
+      $scroll = $ '#scroll'
       i = 0
-      async.whilst (->
-        i < entries.length
-      ), ((cb) ->
+      while i < entries.length
         article = {}
         $$ = cheerio.load entries[i].content,
           normalizeWhitespace: true
@@ -58,31 +57,28 @@ initialize = ->
         article.anchor = i + 1
         $fragment.append articleTemplate article
         i++
-        cb()
-      ), (err) ->
-        $cover = $ '#cover'
-        $scroll = $ '#scroll'
-        $ '#fullpage'
-          .append $fragment
-          .fullpage
-            menu: '#fullpageMenu'
-            afterRender: ->
-              $article = $('.article').eq(0)
-              $article.find('img').on 'load', ->
-                $cover
-                  .css
-                    top: $article.find('.article__header').offset().top
-                    height: $article.find('.article__header').height()
-                  .fadeIn()
-                $scroll.fadeIn()
-            onLeave: (index, nextIndex, direction) ->
-              if direction is 'down'
-                $scroll.fadeOut()
-              if Math.abs(index - nextIndex) > 1 or direction is 'up'
-                index = nextIndex - 1
-              $articleHeader = $('.article').eq(index).find('.article__header')
-              $cover.css
-                top: $articleHeader.position().top
-                height: $articleHeader.height()
+      $ '#fullpage'
+        .append $fragment
+        .fullpage
+          menu: '#fullpageMenu'
+          afterRender: ->
+            $article = $('.article').eq(0)
+            $articleHeader = $article.find('.article__header')
+            $article.find('img').on 'load', ->
+              $cover
+                .css
+                  top: $articleHeader.offset().top
+                  height: $articleHeader.height()
+                .fadeIn()
+              $scroll.fadeIn()
+          onLeave: (index, nextIndex, direction) ->
+            if direction is 'down'
+              $scroll.fadeOut()
+            if Math.abs(index - nextIndex) > 1 or direction is 'up'
+              index = nextIndex - 1
+            $articleHeader = $('.article').eq(index).find('.article__header')
+            $cover.css
+              top: $articleHeader.position().top
+              height: $articleHeader.height()
 
 google.setOnLoadCallback initialize
