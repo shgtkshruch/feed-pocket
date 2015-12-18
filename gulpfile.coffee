@@ -100,7 +100,7 @@ gulp.task 'image', ->
     .pipe gulp.dest config.dest + '/images'
 
 gulp.task 'clean', ->
-  del ['dist/partials', 'dist/scripts/*.js', '!dist/scripts/{main,vendor}.js']
+  del ['dist/partials', 'dist/layout*.html', 'dist/scripts/*.js', '!dist/scripts/{app,main,vendor}.js']
 
 gulp.task 'publish', ->
   ghpages.publish path.join __dirname, config.dest
